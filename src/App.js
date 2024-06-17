@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+ import './App.css';
+import Navbar from './Components/Navbar/Navbar';
+import {Routes,Route} from 'react-router-dom';
+import Home from "../src/Pages/Home/Home.jsx"
+import Cart from "../src/Pages/cart/Cart.jsx";
+import Placeorder from "../src/Pages/Placeorder/Placeorder.jsx"
+import Fooder from './Components/Fooder/Fooder.jsx';
+import { useState } from 'react';
+import Loginpopup from './Components/Loginpopup/Loginpopup.jsx';
+ 
 
-function App() {
+const App = () => {
+
+    const [showLogin,setShowLogin] = useState(false);
   return (
+    <>
+    {showLogin?<Loginpopup setShowLogin={setShowLogin}/>:<></>}
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <Navbar setShowLogin={setShowLogin}/>
+       <Routes>
+        <Route path='/' element={<Home/>} />        
+        <Route path='/cart' element={<Cart/>} />      
+        <Route path='/placeorder' element={<Placeorder/>} />
+        </Routes>
     </div>
+    <Fooder/>
+    </>
+    
   );
 }
 
